@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/ic_image_black_24dp">
+        <shape android:shape="rectangle">
+            <padding
+                android:top="100dp"
+                android:bottom="100dp"
+                android:right="100dp"
+                android:left="100dp"/>
+        </shape>
+    </item>
+
+</selector>
+
