@@ -20,6 +20,7 @@ import android.net.Uri
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import com.lhs94.pictonote.data.Note
 import java.io.File
 
 class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {

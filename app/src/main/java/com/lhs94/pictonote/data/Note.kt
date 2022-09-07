@@ -1,4 +1,4 @@
-package com.lhs94.pictonote.note
+package com.lhs94.pictonote.data
 
 import android.os.Parcelable
 import android.os.Parcel

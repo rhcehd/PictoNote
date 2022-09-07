@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.lhs94.pictonote.note.Note
+import com.lhs94.pictonote.data.Note
 import java.util.ArrayList
 
 class SQLiteControler private constructor(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
