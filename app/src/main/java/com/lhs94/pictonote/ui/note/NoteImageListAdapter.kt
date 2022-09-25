@@ -1,4 +1,4 @@
-package com.lhs94.pictonote.note.image
+package com.lhs94.pictonote.ui.note
 
 import androidx.recyclerview.widget.RecyclerView
 import com.rd.PageIndicatorView
@@ -10,22 +10,23 @@ import android.content.Context
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
+import com.lhs94.pictonote.note.image.AttachOptionDialog
 import java.util.ArrayList
 
-class ImageListAdapter(private val context: Context) : RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
+class NoteImageListAdapter() : RecyclerView.Adapter<NoteImageListAdapter.ViewHolder>() {
     private var imageEditable = true
     private var imageList: ArrayList<Uri?>? = null
     private var pageIndicator: PageIndicatorView? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(context).inflate(R.layout.item_note_image, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_note_image, parent, false)
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ImageListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val vh = holder as ViewHolder
         vh.imageUri = imageList!![position]
         vh.setViews()
-        Glide.with(context).load(vh.imageUri).error(R.drawable.image_empty).into(vh.image)
+        Glide.with(vh.image.context).load(vh.imageUri).error(R.drawable.image_empty).into(vh.image)
     }
 
     override fun getItemCount(): Int {
@@ -73,7 +74,7 @@ class ImageListAdapter(private val context: Context) : RecyclerView.Adapter<Imag
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.image -> if (imageEditable && !hasImage) {
-                    val dialog = AttachOptionDialog(context)
+                    val dialog = AttachOptionDialog(v.context)
                     dialog.show()
                 }
                 R.id.icon_delete -> removeImage(imageUri)

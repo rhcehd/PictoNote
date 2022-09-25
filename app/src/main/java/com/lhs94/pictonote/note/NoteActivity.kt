@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.lhs94.pictonote.note.image.DepthPageTransformer
 import com.lhs94.pictonote.sqlite.SQLiteControler
-import com.lhs94.pictonote.note.image.ImageListAdapter
+import com.lhs94.pictonote.ui.note.NoteImageListAdapter
 import android.os.Build
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import android.net.Uri
@@ -30,10 +30,10 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
     private var editText: EditText? = null
     private var haveToSave = false
     private var selectingImage = false
-    private var pageAdapter: ImageListAdapter? = null
+    private var pageAdapter: NoteImageListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_note)
+        setContentView(R.layout.fragment_note)
         AppController.instance?.setCurrentNoteActivity(this)
         val toolbar = findViewById<Toolbar>(R.id.toolbar_note)
         setSupportActionBar(toolbar)
@@ -45,7 +45,7 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
         editTitle = v.findViewById(R.id.edit_title)
         editText = findViewById(R.id.edit_text)
         val v2 = findViewById<ViewPager2>(R.id.view_pager)
-        pageAdapter = ImageListAdapter(this)
+        pageAdapter = NoteImageListAdapter()
         v2.adapter = pageAdapter
         v2.setPageTransformer(DepthPageTransformer())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
