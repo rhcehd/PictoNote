@@ -60,9 +60,9 @@ class AttachOptionDialog internal constructor(context: Context) : AlertDialog(co
                     ac.startActivityForResult(intent, OPTION_GALLERY)
                 }
                 R.id.attach_url -> {
-                    AppController.instance?.setSelectingImage(true)
+                    /*AppController.instance?.setSelectingImage(true)
                     intent.setClass(context, UrlOptionActivity::class.java)
-                    ac.startActivityForResult(intent, OPTION_URL)
+                    ac.startActivityForResult(intent, OPTION_URL)*/
                 }
             }
             dismiss()

@@ -8,4 +8,8 @@
         android:id="@+id/mainFragment"
         android:name="com.lhs94.pictonote.ui.main.MainFragment"
         android:label="MainFragment" />
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.lhs94.pictonote.ui.note.NoteFragment"
+        android:label="NoteFragment" />
 </navigation>

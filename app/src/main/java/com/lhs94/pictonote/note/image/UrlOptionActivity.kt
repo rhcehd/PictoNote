@@ -11,7 +11,7 @@ import android.net.Uri
 import androidx.appcompat.app.AlertDialog
 
 class UrlOptionActivity : AppCompatActivity() {
-    private val intent = Intent()
+    private var intent2 = Intent()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UrlOptionDialog(this).show()
@@ -22,13 +22,13 @@ class UrlOptionActivity : AppCompatActivity() {
         override fun onClick(dialog: DialogInterface, which: Int) {
             val url = editText.text.toString()
             val uri = Uri.parse(url)
-            intent.data = uri
-            setResult(RESULT_OK, intent)
+            intent2.data = uri
+            setResult(RESULT_OK, intent2)
             finish()
         }
 
         override fun onCancel(dialog: DialogInterface) {
-            setResult(RESULT_CANCELED, intent)
+            setResult(RESULT_CANCELED, intent2)
             finish()
         }
 

@@ -1,14 +1,12 @@
 package com.lhs94.pictonote.ui.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
 import com.lhs94.pictonote.R
 import com.lhs94.pictonote.databinding.FragmentMainBinding
 
@@ -30,5 +28,29 @@ class MainFragment: Fragment(R.layout.fragment_main) {
             binding = DataBindingUtil.bind(view)
             binding?.viewModel = viewModel
         }
+        initializeOptionMenu()
+    }
+
+    private fun initializeOptionMenu() {
+        activity?.addMenuProvider(object: MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.actionbar_main, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when(menuItem.itemId) {
+                    R.id.menu_add -> {
+                        findNavController().navigate(R.id.noteFragment)
+                        true
+                    }
+                    R.id.menu_info -> {
+                        true
+                    }
+                    else -> {
+                        true
+                    }
+                }
+            }
+        }, viewLifecycleOwner)
     }
 }

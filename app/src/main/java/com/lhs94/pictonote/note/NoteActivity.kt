@@ -1,6 +1,5 @@
 package com.lhs94.pictonote.note
 
-import com.rd.PageIndicatorView
 import com.lhs94.pictonote.R
 import com.lhs94.pictonote.note.image.AttachOptionDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,16 +9,11 @@ import android.content.DialogInterface
 import android.widget.EditText
 import com.lhs94.pictonote.AppController
 import android.widget.Toast
-import androidx.viewpager2.widget.ViewPager2
-import com.lhs94.pictonote.note.image.DepthPageTransformer
 import com.lhs94.pictonote.sqlite.SQLiteControler
 import com.lhs94.pictonote.ui.note.NoteImageListAdapter
-import android.os.Build
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import android.net.Uri
 import android.view.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
 import com.lhs94.pictonote.data.Note
 import java.io.File
 
@@ -34,34 +28,7 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_note)
-        AppController.instance?.setCurrentNoteActivity(this)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar_note)
-        setSupportActionBar(toolbar)
-        sqliteController = SQLiteControler.instance
-        val actionBar = supportActionBar!!
-        actionBar.setDisplayShowCustomEnabled(true)
-        actionBar.setDisplayShowTitleEnabled(false)
-        val v = LayoutInflater.from(this).inflate(R.layout.toolbar_title, toolbar)
-        editTitle = v.findViewById(R.id.edit_title)
-        editText = findViewById(R.id.edit_text)
-        val v2 = findViewById<ViewPager2>(R.id.view_pager)
-        pageAdapter = NoteImageListAdapter()
-        v2.adapter = pageAdapter
-        v2.setPageTransformer(DepthPageTransformer())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            v2.scrollIndicators = View.SCROLL_INDICATOR_BOTTOM
-        }
-        val indicator = findViewById<PageIndicatorView>(R.id.page_indicator)
-        pageAdapter!!.setIndicator(indicator)
-        indicator.radius = 4
-        indicator.selectedColor = -0x13287a
-        indicator.unselectedColor = -0x51868
-        v2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                indicator.selection = position
-            }
-        })
+
         note = intent.getParcelableExtra("note")
         if (note == null) {
             note = Note()
@@ -91,15 +58,15 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.actionbar_note, menu)
         if (note?.idx == Note.Companion.NEW_NOTE) {
-            menu.findItem(R.id.action_edit).isVisible = false
-            menu.findItem(R.id.action_delete).isVisible = false
+            menu.findItem(R.id.menu_edit).isVisible = false
+            menu.findItem(R.id.menu_delete).isVisible = false
         }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_edit -> {
+            R.id.menu_edit -> {
                 editTitle!!.isFocusable = true
                 editTitle!!.isFocusableInTouchMode = true
                 editText!!.isFocusable = true
@@ -110,7 +77,7 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
                 haveToSave = true
                 return true
             }
-            R.id.action_delete -> {
+            R.id.menu_delete -> {
                 AlertDialog.Builder(this).setCancelable(true).setMessage("삭제하시겠습니까?")
                         .setPositiveButton("삭제", this).setNegativeButton("취소", this).show()
                 haveToSave = false
