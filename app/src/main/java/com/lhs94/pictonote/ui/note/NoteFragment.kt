@@ -3,6 +3,7 @@ package com.lhs94.pictonote.ui.note
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -40,6 +41,18 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
             viewModel.currentNote = note
         }
         initializeOptionMenu()
+        (activity as? AppCompatActivity)?.supportActionBar?.apply {
+            title = ""
+            this.customView
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as? AppCompatActivity)?.supportActionBar?.apply {
+            title = getString(R.string.app_name)
+            this.customView
+        }
     }
 
     private fun initializeOptionMenu() {
