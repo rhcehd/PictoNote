@@ -8,7 +8,9 @@ import com.lhs94.pictonote.R
 import com.lhs94.pictonote.databinding.ActivityMainBinding
 import com.lhs94.pictonote.sqlite.SQLiteControler
 import com.lhs94.pictonote.ui.widget.toast.Toast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val sharedViewModel: SharedViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         Toast.init(this)
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setCustomView(R.layout.toolbar_title)
 
         SQLiteControler.initControler(this)
         //SQLiteControler.getInstance().clearAllDatabase();

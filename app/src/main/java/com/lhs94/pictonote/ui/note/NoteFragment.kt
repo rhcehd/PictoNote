@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.lhs94.pictonote.R
-import com.lhs94.pictonote.data.Note
 import com.lhs94.pictonote.databinding.FragmentNoteBinding
+import com.lhs94.pictonote.databinding.ToolbarTitleBinding
+import com.lhs94.pictonote.room.entity.Note
 import com.lhs94.pictonote.ui.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NoteFragment: Fragment(R.layout.fragment_note) {
     private val viewModel: NoteViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -33,17 +36,17 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
             binding = DataBindingUtil.bind(view)
             binding?.viewModel = viewModel
             viewModel.sharedViewModel = sharedViewModel
-            val note: Note? = if (Build.VERSION.SDK_INT >= 33) {
-                arguments?.getParcelable("note", Note::class.java)
-            } else {
-                arguments?.getParcelable("note") as? Note
-            }
-            viewModel.currentNote = note
         }
-        initializeOptionMenu()
+        //initializeOptionMenu()
+        viewModel.currentNote = if (Build.VERSION.SDK_INT >= 33) {
+            arguments?.getSerializable("note", Note::class.java) as? Note
+        } else {
+            arguments?.getSerializable("note") as? Note
+        }
         (activity as? AppCompatActivity)?.supportActionBar?.apply {
             title = ""
-            this.customView
+            setDisplayShowCustomEnabled(true)
+            DataBindingUtil.bind<ToolbarTitleBinding>(customView)?.viewModel = viewModel
         }
     }
 
@@ -51,8 +54,15 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
         super.onDestroyView()
         (activity as? AppCompatActivity)?.supportActionBar?.apply {
             title = getString(R.string.app_name)
-            this.customView
+            setDisplayShowCustomEnabled(false)
+            DataBindingUtil.getBinding<ToolbarTitleBinding>(customView)?.viewModel = null
         }
+        // save note
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.saveNote()
     }
 
     private fun initializeOptionMenu() {

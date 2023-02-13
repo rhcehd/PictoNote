@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.lhs94.pictonote.data.Note
+import com.lhs94.pictonote.data.NoteOld
 import java.util.ArrayList
 
 class SQLiteControler private constructor(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
@@ -28,16 +28,16 @@ class SQLiteControler private constructor(context: Context) : SQLiteOpenHelper(c
         database.execSQL("DROP TABLE notes")
     }
 
-    val allDatas: ArrayList<Note>
+    val allDatas: ArrayList<NoteOld>
         get() {
             cursor = database.rawQuery("SELECT * FROM notes", null)
-            val notes = ArrayList<Note>()
+            val notes = ArrayList<NoteOld>()
             while (cursor?.moveToNext() == true) {
                 val idx = cursor?.getInt(0)
                 val title = cursor?.getString(1)
                 val text = cursor?.getString(2)
                 val image = cursor?.getString(3)
-                val note = Note(idx!!, title, text, image)
+                val note = NoteOld(idx!!, title, text, image)
                 notes.add(note)
             }
             return notes

@@ -8,7 +8,7 @@ import android.os.Parcelable.Creator
 import android.net.Uri
 import java.util.ArrayList
 
-class Note : Parcelable {
+class NoteOld : Parcelable {
     var idx: Int
         private set
     var title: String? = null
@@ -87,12 +87,12 @@ class Note : Parcelable {
     companion object {
         const val NEW_NOTE = -1
         @JvmField
-        val CREATOR: Creator<Note?> = object : Creator<Note?> {
-            override fun createFromParcel(`in`: Parcel): Note? {
-                return Note(`in`)
+        val CREATOR: Creator<NoteOld?> = object : Creator<NoteOld?> {
+            override fun createFromParcel(`in`: Parcel): NoteOld? {
+                return NoteOld(`in`)
             }
 
-            override fun newArray(size: Int): Array<Note?> {
+            override fun newArray(size: Int): Array<NoteOld?> {
                 return arrayOfNulls(size)
             }
         }

@@ -14,12 +14,12 @@ import com.lhs94.pictonote.ui.note.NoteImageListAdapter
 import android.net.Uri
 import android.view.*
 import androidx.appcompat.app.AlertDialog
-import com.lhs94.pictonote.data.Note
+import com.lhs94.pictonote.data.NoteOld
 import java.io.File
 
 class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
     private var sqliteController: SQLiteControler? = null
-    private var note: Note? = null
+    private var note: NoteOld? = null
     private var editTitle: EditText? = null
     private var editText: EditText? = null
     private var haveToSave = false
@@ -31,7 +31,7 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
 
         note = intent.getParcelableExtra("note")
         if (note == null) {
-            note = Note()
+            note = NoteOld()
             editText?.hint = "빈 이미지를 터치해 새로운 이미지를 추가하세요\n\n텍스트를 입력하세요"
             pageAdapter!!.setImage(note?.imageList)
             haveToSave = true
@@ -57,7 +57,7 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.actionbar_note, menu)
-        if (note?.idx == Note.Companion.NEW_NOTE) {
+        if (note?.idx == NoteOld.Companion.NEW_NOTE) {
             menu.findItem(R.id.menu_edit).isVisible = false
             menu.findItem(R.id.menu_delete).isVisible = false
         }
@@ -138,7 +138,7 @@ class NoteActivity : AppCompatActivity(), DialogInterface.OnClickListener {
         val text = editText!!.text.toString()
         val image = note?.imageJson
         if (title == "" && text == "" && image == "[]") return
-        if (idx == Note.Companion.NEW_NOTE) {
+        if (idx == NoteOld.Companion.NEW_NOTE) {
             //insertData
             if (title == "") title = "제목 없음"
             sqliteController!!.insertData(title, text, image)
