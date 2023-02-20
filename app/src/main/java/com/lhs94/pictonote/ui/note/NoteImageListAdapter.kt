@@ -10,7 +10,6 @@ import android.content.Context
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
-import com.lhs94.pictonote.note.image.AttachOptionDialog
 import java.util.ArrayList
 
 class NoteImageListAdapter() : RecyclerView.Adapter<NoteImageListAdapter.ViewHolder>() {
@@ -23,7 +22,7 @@ class NoteImageListAdapter() : RecyclerView.Adapter<NoteImageListAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val vh = holder as ViewHolder
+        val vh = holder
         vh.imageUri = imageList!![position]
         vh.setViews()
         Glide.with(vh.image.context).load(vh.imageUri).error(R.drawable.image_empty).into(vh.image)
@@ -74,8 +73,6 @@ class NoteImageListAdapter() : RecyclerView.Adapter<NoteImageListAdapter.ViewHol
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.image -> if (imageEditable && !hasImage) {
-                    val dialog = AttachOptionDialog(v.context)
-                    dialog.show()
                 }
                 R.id.icon_delete -> removeImage(imageUri)
             }

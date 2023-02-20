@@ -16,10 +16,9 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginHorizontal="10dp"
             android:adapter="@{viewModel.noteListAdapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="@{viewModel.layoutManager}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

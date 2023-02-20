@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.lhs94.pictonote.R
 import com.lhs94.pictonote.databinding.ActivityMainBinding
-import com.lhs94.pictonote.sqlite.SQLiteControler
 import com.lhs94.pictonote.ui.widget.toast.Toast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,13 +18,5 @@ class MainActivity : AppCompatActivity() {
         Toast.init(this)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setCustomView(R.layout.toolbar_title)
-
-        SQLiteControler.initControler(this)
-        //SQLiteControler.getInstance().clearAllDatabase();
-    }
-
-    override fun onDestroy() {
-        SQLiteControler.instance?.closeControler()
-        super.onDestroy()
     }
 }
