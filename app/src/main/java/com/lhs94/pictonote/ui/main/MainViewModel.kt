@@ -1,11 +1,9 @@
 package com.lhs94.pictonote.ui.main
 
-import android.content.Context
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.lhs94.pictonote.room.AppDatabase
 import com.lhs94.pictonote.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject

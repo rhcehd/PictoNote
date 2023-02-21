@@ -5,7 +5,6 @@ import com.lhs94.pictonote.BR
 import com.lhs94.pictonote.room.AppDatabase
 import com.lhs94.pictonote.room.entity.Note
 import com.lhs94.pictonote.ui.BaseViewModel
-import com.lhs94.pictonote.ui.SharedViewModel
 import com.lhs94.pictonote.ui.widget.toast.Toast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -14,7 +13,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(private val database: AppDatabase): BaseViewModel() {
-    var sharedViewModel: SharedViewModel? = null
     var currentNote: Note? = null
         get() {
             val currentNote = field
@@ -55,11 +53,11 @@ class NoteViewModel @Inject constructor(private val database: AppDatabase): Base
         } else {
             database.noteDao().updateNote(note)
         }
-        completable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
+        completable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe()
+            /*.subscribe({
                 Toast.showDebugToast("저장됨")
             }, {
                 Toast.showDebugToast("$it")
-            })
+            })*/
     }
 }

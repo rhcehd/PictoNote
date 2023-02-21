@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/background_item"
+            android:background="@drawable/background_note_list_item"
             android:descendantFocusability="blocksDescendants"
             android:elevation="8dp"
             android:onClick="@{(view) -> adapter.onClickNoteListItem(view, index)}">

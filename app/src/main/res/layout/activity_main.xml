@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="viewModel" type="com.lhs94.pictonote.ui.SharedViewModel" />
         <import type="android.view.View"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,14 +19,6 @@
             app:titleTextColor="#FF000000"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="제목을 입력해주세요"
-                android:text="@={viewModel.noteTitle}"
-                android:visibility="@{viewModel.noteTitleVisible ? View.VISIBLE : View.GONE}"/>
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.fragment.app.FragmentContainerView
